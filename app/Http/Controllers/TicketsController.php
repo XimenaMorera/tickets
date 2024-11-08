@@ -14,25 +14,45 @@ class TicketsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        // Realizamos la consulta con JOINs
-        $tickets = DB::table('tickets')
-            ->join('users as creators', 'tickets.created_by', '=', 'creators.id')
-            ->leftJoin('users as assignees', 'tickets.assigned_to', '=', 'assignees.id')
-            ->select(
-                'tickets.id', 
-                'tickets.title', 
-                'tickets.status', 
-                'creators.name as creator_name',
-                'assignees.name as assignee_name'
-            )
-            ->get();
+        
+      //  Realizamos la consulta con JOINs
+        // $tickets = DB::table('tickets')
+        //     ->join('users as creators', 'tickets.created_by', '=', 'creators.id')
+        //     ->leftJoin('users as assignees', 'tickets.assigned_to', '=', 'assignees.id')
+        //     ->select(
+        //         'tickets.id', 
+        //         'tickets.title', 
+        //         'tickets.status', 
+        //         'creators.name as creator_name',
+        //         'assignees.name as assignee_name'
+        //     )
+        //     ->get();
 
         // Pasamos los tickets a la vista
-        return view('tickets.index', ['tickets' => $tickets]);
+    //    return view('tickets.index', ['tickets' => $tickets]);
+    $search = $request->input('search');
+    $tickets = DB::table('tickets')
+    ->join('users as creators', 'tickets.created_by', '=', 'creators.id')
+    ->leftJoin('users as assignees', 'tickets.assigned_to', '=', 'assignees.id')
+    ->select(
+        'tickets.id',
+        'tickets.title',
+        'tickets.status',
+        'creators.name as creator_name',
+        'assignees.name as assignee_name'
+    )
+    ->when($search, function ($query, $search) {
+        return $query->where('tickets.title', 'like', '%' . $search . '%')
+                     ->orWhere('tickets.description', 'like', '%' . $search . '%')
+                     ->orWhere('creators.name', 'like', '%' . $search . '%')
+                     ->orWhere('assignees.name', 'like', '%' . $search . '%');
+    })
+    ->get();
 
+// Pasar los tickets a la vista
+return view('tickets.index', ['tickets' => $tickets]);
         //  Usamos Eloquent con relaciones para obtener los tickets
         //   $tickets = Tickets::with(['creator', 'assignee'])->get();
 

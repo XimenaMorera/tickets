@@ -18,6 +18,18 @@
         </x-slot>
     <div class="container"  data-bs-theme="blue">
     {{-- <h1>Listado de Tickets</h1> --}}
+    <div class="row justify-content-start mt-3">
+    <form method="GET" action="{{ route('tickets.index') }}" class="d-flex mb-1">
+      <input 
+          type="text" 
+          name="search" 
+          class="form-control form-control-sm me-2" 
+          placeholder="Buscar ticket" 
+          value="{{ request('search') }}"
+      >
+      <button class="btn btn-primary btn-sm" type="submit" style="background-color: darkblue">Buscar</button>
+  </form>
+</div>
     <div class="row justify-content-end mb-2">
       <div class="col-auto">
           <a href="{{ route('tickets.create') }}" class="btn btn-primary btn-sm" style="background-color: darkblue">Crear ticket</a>
