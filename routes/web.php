@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/register/create', [RegisteredController::class, 'create'])->name('register.create');
 });
 
 Route::middleware('auth')->group(function () {
@@ -38,7 +40,9 @@ Route::delete('/tickets/{ticket}', [TicketsController::class, 'destroy'])->name(
 Route::put('/tickets/{ticket}', [TicketsController::class, 'update'])->name('tickets.update');  
 Route::get('/tickets/{ticket}/edit', [TicketsController::class, 'edit'])->name('tickets.edit');
 
+// Route::get('/usuarios', [UserController::class, 'index']) ->middleware(CheckRole::class . ':administrador')->name('usuarios.index');
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+
 Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
 Route::get('/usuarios/create', [UserController::class, 'create'])->name('usuarios.create');
 Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->name('usuarios.update');  

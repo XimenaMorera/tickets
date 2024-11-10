@@ -22,6 +22,10 @@ return new class extends Migration
             $table->integer('assigned_to')->nullable();  // Usuario asignado (soporte)
             $table->timestamps();
 
+             // Campos de fecha adicionales que pueden estar vacíos
+             $table->date('fecha_creacion')->nullable();
+             $table->date('fecha_final')->nullable();
+             
             // Relaciones con la tabla users
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');

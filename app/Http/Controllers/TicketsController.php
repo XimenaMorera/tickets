@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Tickets;
 use App\Models\Users;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -94,7 +95,9 @@ return view('tickets.index', ['tickets' => $tickets]);
         $ticket->description = $request->description;    // Descripción del ticket
         $ticket->created_by = auth()->id();              // Usuario autenticado que crea el ticket
         $ticket->assigned_to = $request->assigned_to;    // Usuario asignado
-        $ticket->status = 'abierto';                        // Estado inicial del ticket
+        $ticket->status = 'abierto';   
+        $ticket->created_at = Carbon::now(); // Asigna la fecha actual; puedes usar otra fecha si es necesario
+    $ticket->updated_at = Carbon::now();                     // Estado inicial del ticket
         $ticket->save();
     
         // Obtener todos los tickets con la información de los creadores y asignados

@@ -43,6 +43,9 @@
             <th scope="col">Estado</th>
             <th scope="col">Creado por</th>
             <th scope="col">Asignado a</th>
+            <th scope="col">Fecha creada</th>
+            <th scope="col">Actualizacion</th>
+            
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -54,6 +57,8 @@
                 <td>{{ $ticket->status }}</td>
                 <td>{{ $ticket->creator_name }}</td>
                 <td>{{ $ticket->assignee_name }}</td>
+                <td>{{ $ticket->created_at ?? 'NULL' }}</td>
+                <td>{{ $ticket->updated_at ?? 'NULL' }}</td>
                 <td>
                   <a href="{{ route('tickets.edit', ['ticket' => $ticket->id]) }}" class="btn btn-info">Editar</a>
 
