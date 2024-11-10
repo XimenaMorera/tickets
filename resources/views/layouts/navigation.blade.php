@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white hover:text-blue-200"> <!-- Links en blanco -->
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.index')" class="text-white hover:text-blue-200"> <!-- Links en blanco -->
                         {{ __('Tickets') }}

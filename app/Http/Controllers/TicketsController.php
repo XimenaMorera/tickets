@@ -42,7 +42,9 @@ class TicketsController extends Controller
         'tickets.title',
         'tickets.status',
         'creators.name as creator_name',
-        'assignees.name as assignee_name'
+        'assignees.name as assignee_name',
+        'tickets.created_at',
+        'tickets.updated_at',
     )
     ->when($search, function ($query, $search) {
         return $query->where('tickets.title', 'like', '%' . $search . '%')
@@ -54,11 +56,7 @@ class TicketsController extends Controller
 
 // Pasar los tickets a la vista
 return view('tickets.index', ['tickets' => $tickets]);
-        //  Usamos Eloquent con relaciones para obtener los tickets
-        //   $tickets = Tickets::with(['creator', 'assignee'])->get();
-
-        //   // Pasamos los tickets a la vista
-        //   return view('tickets.index', ['tickets' => $tickets]);
+     
     }
 
     /**
@@ -73,6 +71,8 @@ return view('tickets.index', ['tickets' => $tickets]);
 
         // Retornar la vista de creación de ticket con los usuarios
         return view('tickets.new', ['users' => $users]);
+
+    
     }
 
     /**
