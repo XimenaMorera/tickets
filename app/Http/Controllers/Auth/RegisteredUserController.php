@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        // return view('auth.register');
     }
 
     /**
@@ -44,10 +44,12 @@ class RegisteredUserController extends Controller
             'role' => $request->role ,
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('register.create')
+        ->with('success', 'Usuario registrado exitosamente. Puedes registrar otro.');
     }
 }

@@ -1,48 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Crear Usuario</title>
-</head>
-<body>
-    <h3 class="container" style="background-color: #1e3a8a; color: white">Crear Usuario</h3>
-    <div class="container" style="background-color: #e6e6e6;">
-        <form method="POST" action="{{ route('usuarios.store') }}">
-            @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Escribe el nombre del usuario" required>
+<x-guest-layout >
+    <div>
+    <form method="POST" action="{{ route('register') }}" >
+        @csrf
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg" style="background-color: rgb(5, 5, 100)">
+
+            <!-- Name -->
+            <div>
+                <x-input-label for="name" :value="__('Name')"  class="text-white"/>
+                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Escribe el correo electrónico del usuario" required>
-            </div>
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" class="text-white"/>
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Escribe la contraseña" required>
-            </div>
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" class="text-white"/>
 
-            <div class="mb-3">
-                <label for="role" class="form-label">Rol</label>
-                <select class="form-select" id="role" name="role" required>
-                    <option selected disabled value="">Selecciona un rol...</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="soporte">Soporte</option>
-                </select>
-            </div>
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="new-password" />
 
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('usuarios.index') }}" class="btn btn-warning">Cancelar</a>
-            </div>
-        </form>
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+        <div class="mb-3">
+           
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-white" />
+
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                            type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+        <div class="mt-4">
+        <label for="role" class="form-label text-white">Rol</label>
+        <select class="form-select" id="role" name="role" required>
+            <option selected disabled value="">Selecciona un rol...</option>
+            <option value="administrador">Administrador</option>
+            <option value="soporte">Soporte</option>
+        </select>
     </div>
-</body>
-</html>
+
+
+        <div class="flex items-center justify-end mt-4">
+            {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a> --}}
+
+            <x-primary-button class="ml-4">
+                {{ __('Register') }}
+            </x-primary-button>
+        </div>
+    </div>
+    </form>
+</x-guest-layout>
+

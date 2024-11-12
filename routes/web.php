@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SoporteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
@@ -29,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/register/create', [RegisteredController::class, 'create'])->name('register.create');
+    Route::get('/register', [RegisteredUserController::class, 'create']);
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -47,6 +50,10 @@ Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store
 Route::get('/usuarios/create', [UserController::class, 'create'])->name('usuarios.create');
 Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->name('usuarios.update');  
 Route::get('/usuarios/{usuario}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
+
+Route::get('/soporte', [SoporteController::class, 'index'])->name('soporte.index');
+Route::put('/soporte/{ticket}', [SoporteController::class, 'update'])->name('soporte.update');  
+Route::get('/soporte/{ticket}/edit', [SoporteController::class, 'edit'])->name('soporte.edit');
 }); 
 
 require __DIR__.'/auth.php';

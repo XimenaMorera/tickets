@@ -17,14 +17,25 @@
                     </x-nav-link>
                 </div> --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::user()->role === 'administrador')
                     <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.index')" class="text-white hover:text-blue-200"> <!-- Links en blanco -->
                         {{ __('Tickets') }}
                     </x-nav-link>
+                    @endif
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::user()->role === 'administrador')
                     <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')" class="text-white hover:text-blue-200"> <!-- Links en blanco -->
                         {{ __('Usuarios') }}
                     </x-nav-link>
+                    @endif
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::user()->role === 'soporte')
+                    <x-nav-link :href="route('soporte.index')" :active="request()->routeIs('soporte.*')" class="text-white hover:text-blue-200"> <!-- Links en blanco -->
+                        {{ __('Soporte') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

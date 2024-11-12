@@ -56,6 +56,7 @@
 <!-- Botón Agregar Usuario -->
 <div class="row justify-content-end mb-2">
     <div class="col-auto">
+      {{-- <a href="{{ route('register') }}" class="btn btn-primary btn-sm" style="background-color: darkblue">Agregar Usuario</a> --}}
         <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm" style="background-color: darkblue">Agregar Usuario</a>
     </div>
 </div>
